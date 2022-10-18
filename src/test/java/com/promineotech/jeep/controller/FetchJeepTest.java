@@ -59,8 +59,4 @@ class FetchJeepTest {
 	
 	@LocalServerPort
 	private int serverPort;
-	
-	
-
-
 }

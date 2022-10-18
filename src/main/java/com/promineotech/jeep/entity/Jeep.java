@@ -17,5 +17,9 @@ public class Jeep {
 	private int numDoors;
 	private int wheelsize;
 	private BigDecimal basePrice;
+	public static Object builder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
