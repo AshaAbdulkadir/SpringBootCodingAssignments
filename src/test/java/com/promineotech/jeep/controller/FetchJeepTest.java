@@ -22,7 +22,14 @@ import com.promineotech.jeep.entity.JeepModel;
 import lombok.Getter;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
+
 class FetchJeepTest {
+	@Autowired
+	private TestRestTemplate restTemplate;
+	
+	@LocalServerPort
+	private int serverPort;
 
 	@Test
 	void testThatJeepsAreReturnedWhenAValidModelAndTrimAreSupplied() {
@@ -41,11 +48,6 @@ class FetchJeepTest {
 		// Then: a success (OK - 200) status code is returned
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
-	@Autowired
-	@Getter
-	private TestRestTemplate restTemplate;
-	
-	@LocalServerPort
-	private int serverPort;
+
 
 }
