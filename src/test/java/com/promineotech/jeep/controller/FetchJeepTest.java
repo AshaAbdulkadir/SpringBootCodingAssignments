@@ -1,6 +1,9 @@
 package com.promineotech.jeep.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +28,6 @@ import lombok.Getter;
 @ActiveProfiles("test")
 
 class FetchJeepTest {
-	@Autowired
-	private TestRestTemplate restTemplate;
-	
-	@LocalServerPort
-	private int serverPort;
 
 	@Test
 	void testThatJeepsAreReturnedWhenAValidModelAndTrimAreSupplied() {
@@ -47,7 +45,22 @@ class FetchJeepTest {
 		
 		// Then: a success (OK - 200) status code is returned
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		
+		//And: the actual list is the same as the expected list
+		List<Jeep> expected = buildExpected();
+		assertThat(response.getBody()).isEqualTo(expected);
 	}
+	private List<Jeep> buildExpected() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Autowired
+	private TestRestTemplate restTemplate;
+	
+	@LocalServerPort
+	private int serverPort;
+	
+	
 
 
 }
