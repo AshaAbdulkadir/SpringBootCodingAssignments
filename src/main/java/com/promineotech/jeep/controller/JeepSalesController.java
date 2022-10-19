@@ -24,10 +24,11 @@ import io.swagger.v3.oas.annotations.servers.Server;
 @OpenAPIDefinition(info = @Info(title ="Jeep Sales Service"), servers = {
 		@Server(url = "http://localhost:8080", description = "Local server.")})
 public interface JeepSalesController {
+	
 	//@formatter:off 
 	@Operation(
 			summary = "Returns a list of jeeps",
-			description = "Returnsa list of Jeeps given an optional model and /or trim",
+			description = "Returns a list of Jeeps given an optional model and /or trim",
 			responses = {
 					@ApiResponse(
 							responseCode = "200", 
@@ -47,6 +48,7 @@ public interface JeepSalesController {
 							description = "An unplanned error occured.", 
 							content = @Content(mediaType = "application/json"))
 			},
+			
 			parameters = {
 					@Parameter(
 							name = "model", 
