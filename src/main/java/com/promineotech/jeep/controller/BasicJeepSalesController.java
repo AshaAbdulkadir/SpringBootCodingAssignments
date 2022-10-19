@@ -10,13 +10,9 @@ import com.promineotech.jeep.entity.JeepModel;
 import com.promineotech.jeep.service.JeepSalesService;
 import lombok.extern.slf4j.Slf4j;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @RestController
 @Slf4j
 public class BasicJeepSalesController implements JeepSalesController {
-	 Logger log = LoggerFactory.getLogger(getClass());
 	 
 	@Autowired
 	private JeepSalesService jeepSalesService;
