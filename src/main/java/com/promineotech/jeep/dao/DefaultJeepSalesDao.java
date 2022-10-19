@@ -31,7 +31,7 @@ public class DefaultJeepSalesDao implements JeepSalesDao {
 		// @formatter:off
 		String sql = ""
 				+ "SELECT * "
-				+ "FROM models"
+				+ "FROM models "
 				+ "WHERE model_id = :model_id AND trim_level= :trim_level";
 		
 		// @formatter:on
