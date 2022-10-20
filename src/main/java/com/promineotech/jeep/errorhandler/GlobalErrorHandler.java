@@ -17,7 +17,11 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import lombok.extern.slf4j.Slf4j;
-
+/**
+ * 
+ * @author Asha
+ *
+ */
 @RestControllerAdvice
 @Slf4j
 public class GlobalErrorHandler {
@@ -27,7 +31,8 @@ public class GlobalErrorHandler {
 	}
 	
 	
-	/*
+	/**
+	 * 
 	 * @param e
 	 * @param webRequest
 	 * @return
@@ -50,10 +55,11 @@ public class GlobalErrorHandler {
 			LogStatus.MESSAGE_ONLY);
 	}
 	
-	/*
+	/**
+	 * 
 	 * @param e
 	 * @param webRequest
-	 * 
+	 * @return
 	 */
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
@@ -64,13 +70,12 @@ public class GlobalErrorHandler {
 				webRequest, LogStatus.STACK_TRACE);
 	}
 	
-	/*
+	/**
+	 * 
 	 * @param e
 	 * @param webRequest
 	 * @return
-	 * 
 	 */
-	
 	@ExceptionHandler(NoSuchElementException.class)
 	@ResponseStatus(code = HttpStatus.NOT_FOUND)
 	public Map<String, Object> handleNoSuchElementException(
@@ -81,13 +86,14 @@ public class GlobalErrorHandler {
 		
 	}
 	
-	/*
+	/**
 	 * 
 	 * @param e
 	 * @param status
 	 * @param webRequest
+	 * @param logStatus
+	 * @return
 	 */
-
 	private Map<String, Object> createExceptionMessage(Exception e,
 			HttpStatus status, WebRequest webRequest, LogStatus logStatus) {
 		

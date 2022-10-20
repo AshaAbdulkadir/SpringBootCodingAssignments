@@ -34,7 +34,11 @@ import com.promineotech.jeep.controller.support.FetchJeepTestSupport;
 import com.promineotech.jeep.entity.Jeep;
 import com.promineotech.jeep.entity.JeepModel;
 import com.promineotech.jeep.service.JeepSalesService;
-
+/**
+ * 
+ * @author Asha
+ *
+ */
 class FetchJeepTest {
 
 	@Nested
@@ -65,15 +69,15 @@ class FetchJeepTest {
 					});
 
 			// Then: a not found (404) status code is returned
-		//	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+			assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
 
 			// And: an error message is returned
 			Map<String, Object> error = response.getBody();
 
-		//	assertErrorMessageValid(error, HttpStatus.BAD_REQUEST);
+			assertErrorMessageValid(error, HttpStatus.BAD_REQUEST);
 		}
 
-		/*
+		/**
 		 * 
 		 */
 		@Test
@@ -95,10 +99,10 @@ class FetchJeepTest {
 			// And: an error message is returned
 			Map<String, Object> error = response.getBody();
 
-		//	assertErrorMessageValid(error, HttpStatus.NOT_FOUND);
+			assertErrorMessageValid(error, HttpStatus.NOT_FOUND);
 		}
 
-		/*
+		/**
 		 * 
 		 */
 		@Test
@@ -148,7 +152,7 @@ class FetchJeepTest {
 		@MockBean
 		private JeepSalesService jeepSalesService;
 
-		/*
+		/**
 		 * 
 		 */
 		@Test
@@ -172,7 +176,7 @@ class FetchJeepTest {
 			// And: an error message is returned
 			Map<String, Object> error = response.getBody();
 
-		//	assertErrorMessageValid(error, HttpStatus.INTERNAL_SERVER_ERROR);
+			assertErrorMessageValid(error, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}

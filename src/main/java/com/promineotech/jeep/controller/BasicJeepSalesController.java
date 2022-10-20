@@ -9,7 +9,11 @@ import com.promineotech.jeep.entity.Jeep;
 import com.promineotech.jeep.entity.JeepModel;
 import com.promineotech.jeep.service.JeepSalesService;
 import lombok.extern.slf4j.Slf4j;
-
+/**
+ * 
+ * @author Asha
+ *
+ */
 @RestController
 @Slf4j
 public class BasicJeepSalesController implements JeepSalesController {
