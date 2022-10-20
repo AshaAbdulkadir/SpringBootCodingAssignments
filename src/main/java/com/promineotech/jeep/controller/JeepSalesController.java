@@ -2,12 +2,16 @@ package com.promineotech.jeep.controller;
 
 import java.util.List;
 
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.promineotech.jeep.Constants;
 import com.promineotech.jeep.entity.Jeep;
 import com.promineotech.jeep.entity.JeepModel;
 
@@ -25,6 +29,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
 		@Server(url = "http://localhost:8080", description = "Local server.")})
 public interface JeepSalesController {
 	
+
 	//@formatter:off 
 	@Operation(
 			summary = "Returns a list of jeeps",
@@ -65,8 +70,11 @@ public interface JeepSalesController {
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
 	  List<Jeep> fetchJeeps(
+			  
 			  @RequestParam(required = false)
 			  	JeepModel model, 
+			  @Length(max = Constants.TRIM_MAX_LENGTH)
+			  @Pattern(regexp = "[\\w\\s]*")
 			  @RequestParam(required = false)
 			  	String trim);
 	//@formatter:on
