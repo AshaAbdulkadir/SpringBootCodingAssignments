@@ -3,6 +3,7 @@ package com.promineotech.jeep.controller;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,63 +23,58 @@ import com.promineotech.jeep.controller.support.FetchJeepTestSupport;
 import com.promineotech.jeep.entity.Jeep;
 import com.promineotech.jeep.entity.JeepModel;
 
-
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-@Sql(
-	scripts = {"classpath:flyway/migrations/V1.0__Jeep_Schema.sql",
-		 "classpath:flyway/migrations/V1.1__Jeep_Data.sql"},
-	config = @SqlConfig(encoding = "utf-8"))
+@Sql(scripts = { "classpath:flyway/migrations/V1.0__Jeep_Schema.sql",
+		"classpath:flyway/migrations/V1.1__Jeep_Data.sql" }, config = @SqlConfig(encoding = "utf-8"))
 
 class FetchJeepTest extends FetchJeepTestSupport {
-	
+
 	@Test
 	void testThatJeepsAreReturnedWhenAValidModelAndTrimAreSupplied() {
-		
+
 		// Given: a valid model, trim and URI
 		JeepModel model = JeepModel.WRANGLER;
 		String trim = "Sport";
-		String uri = 
-				String.format("http://localhost:%d/jeeps?model=%s&trim=%s", serverPort, model, trim);
-		
+		String uri = String.format("http://localhost:%d/jeeps?model=%s&trim=%s", serverPort, model, trim);
+
 		// When: a connection is made to the URI
-		ResponseEntity<List<Jeep>> response = restTemplate.exchange(uri, HttpMethod.GET, null, 
-				new ParameterizedTypeReference<>() {});
-		
+		ResponseEntity<List<Jeep>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
+				new ParameterizedTypeReference<>() {
+				});
+
 		// Then: a success (OK - 200) status code is returned
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		
+
 		// And: the actual list is the same as the expected list
 		List<Jeep> actual = response.getBody();
 		List<Jeep> expected = buildExpected();
-		
-		
+
 		assertThat(actual).isEqualTo(expected);
 	}
+
 	@Test
 	void testThatJeepsAreReturnedWhenAValidModelAndTrimAreSupplied1() {
-		
+
 		// Given: a valid model, trim and URI
 		JeepModel model = JeepModel.WRANGLER;
 		String trim = "Sport";
-		String uri = 
-				String.format("http://localhost:%d/jeeps?model=%s&trim=%s", serverPort, model, trim);
-		
+		String uri = String.format("http://localhost:%d/jeeps?model=%s&trim=%s", serverPort, model, trim);
+
 		// When: a connection is made to the URI
-		ResponseEntity<List<Jeep>> response = restTemplate.exchange(uri, HttpMethod.GET, null, 
-				new ParameterizedTypeReference<>() {});
-		
+		ResponseEntity<List<Jeep>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
+				new ParameterizedTypeReference<>() {
+				});
+
 		// Then: a success (OK - 200) status code is returned
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		
+
 		// And: the actual list is the same as the expected list
 		List<Jeep> actual = response.getBody();
 		List<Jeep> expected = buildExpected();
-		
-		
+
 		assertThat(actual).isEqualTo(expected);
 	}
-	
 
 	@Test
 	void testThatAnErrorMessageIsReturnedWhenAnInvalidTrimIsSupplied() {
@@ -90,19 +86,28 @@ class FetchJeepTest extends FetchJeepTestSupport {
 				String.format("http://localhost:%d/jeeps?model=%s&trim=%s", serverPort, model, trim);
 		
 		// When: a connection is made to the URI
-		ResponseEntity<?> response = getRestTemplate().exchange(uri,
+		ResponseEntity<Map<String, Object>> response = getRestTemplate().exchange(uri,
 				 HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 		
 		// Then: a not found (404) status code is returned
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
 		
 		// And: an error message is returned 
-
+		Map<String, Object> error = response.getBody();
+		
+		// @formatter: off
+		assertThat(error)
+				.containsKey("message")
+				//.containsEntry("status code", HttpStatus.NOT_FOUND.value())
+				.containsEntry("uri", "/jeeps")
+				.containsKey("timestamp")
+				.containsEntry("reason", HttpStatus.NOT_FOUND.getReasonPhrase());
+		// @formatter: on
 	}
-	
+
 	@Autowired
 	private TestRestTemplate restTemplate;
-	
+
 	@LocalServerPort
 	private int serverPort;
 }

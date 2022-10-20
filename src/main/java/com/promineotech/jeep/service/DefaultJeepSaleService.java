@@ -30,14 +30,15 @@ public class DefaultJeepSaleService implements JeepSalesService {
 		
 		List<Jeep> jeeps = jeepSalesDao.fetchJeeps(model, trim);
 		
-		if(jeeps.isEmpty()) {
-			String msg = String.format("No jeeps found with model=%s and trim=%s", model, trim);
+		if (jeeps.isEmpty()) {
+			String msg = String.format("No jeeps found with model=%s and trim=%s",
+					model, trim);
 			
 			throw new NoSuchElementException(msg);
 		}
 		
 		Collections.sort(jeeps);
-		return jeeps;
+		return jeeps; 
 	}
 
 }
