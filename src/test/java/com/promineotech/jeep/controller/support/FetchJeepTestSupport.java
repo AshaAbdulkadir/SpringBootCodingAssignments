@@ -18,11 +18,21 @@ public class FetchJeepTestSupport extends BaseTest {
 		List<Jeep> list = new LinkedList<>();
 
 		// @formatter: off
-		list.add(Jeep.builder().modelId(JeepModel.WRANGLER).trimLevel("Sport").numDoors(4).wheelsize(17)
-				.basePrice(new BigDecimal("31975.00")).build());
+		list.add(Jeep.builder()
+				.modelId(JeepModel.WRANGLER)
+				.trimLevel("Sport")
+				.numDoors(4)
+				.wheelsize(17)
+				.basePrice(new BigDecimal("31975.00"))
+				.build());
 		
-		list.add(Jeep.builder().modelId(JeepModel.WRANGLER).trimLevel("Sport").numDoors(2).wheelsize(17)
-				.basePrice(new BigDecimal("28475.00")).build());
+		list.add(Jeep.builder()
+				.modelId(JeepModel.WRANGLER)
+				.trimLevel("Sport")
+				.numDoors(2)
+				.wheelsize(17)
+				.basePrice(new BigDecimal("28475.00"))
+				.build());
 
 		// @formatter: on
 		
@@ -35,11 +45,11 @@ public class FetchJeepTestSupport extends BaseTest {
 		
 		// @formatter: off
 		assertThat(error)
-				.containsKey("message")
-				.containsEntry("status code", status.value())
-				.containsEntry("uri", "/jeeps")
-				.containsKey("timestamp")
-				.containsEntry("reason", status.getReasonPhrase());
+		.containsKey("message")
+		.containsEntry("status code", status.value())
+		.containsEntry("uri", "/jeeps")
+		.containsKey("timestamp")
+		.containsEntry("reason", status.getReasonPhrase());
 		// @formatter: on
 	}
 }
