@@ -31,7 +31,7 @@ import com.promineotech.jeep.entity.JeepModel;
 	config = @SqlConfig(encoding = "utf-8"))
 
 class FetchJeepTest extends FetchJeepTestSupport {
-
+	
 	@Test
 	void testThatJeepsAreReturnedWhenAValidModelAndTrimAreSupplied() {
 		
@@ -54,6 +54,50 @@ class FetchJeepTest extends FetchJeepTestSupport {
 		
 		
 		assertThat(actual).isEqualTo(expected);
+	}
+	@Test
+	void testThatJeepsAreReturnedWhenAValidModelAndTrimAreSupplied1() {
+		
+		// Given: a valid model, trim and URI
+		JeepModel model = JeepModel.WRANGLER;
+		String trim = "Sport";
+		String uri = 
+				String.format("http://localhost:%d/jeeps?model=%s&trim=%s", serverPort, model, trim);
+		
+		// When: a connection is made to the URI
+		ResponseEntity<List<Jeep>> response = restTemplate.exchange(uri, HttpMethod.GET, null, 
+				new ParameterizedTypeReference<>() {});
+		
+		// Then: a success (OK - 200) status code is returned
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		
+		// And: the actual list is the same as the expected list
+		List<Jeep> actual = response.getBody();
+		List<Jeep> expected = buildExpected();
+		
+		
+		assertThat(actual).isEqualTo(expected);
+	}
+	
+
+	@Test
+	void testThatAnErrorMessageIsReturnedWhenAnInvalidTrimIsSupplied() {
+		
+		// Given: a valid model, trim and URI
+		JeepModel model = JeepModel.WRANGLER;
+		String trim = "invalid Value";
+		String uri = 
+				String.format("http://localhost:%d/jeeps?model=%s&trim=%s", serverPort, model, trim);
+		
+		// When: a connection is made to the URI
+		ResponseEntity<?> response = getRestTemplate().exchange(uri,
+				 HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+		
+		// Then: a not found (404) status code is returned
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+		
+		// And: an error message is returned 
+
 	}
 	
 	@Autowired
