@@ -18,6 +18,7 @@ public class FetchJeepTestSupport extends BaseTest {
 		List<Jeep> list = new LinkedList<>();
 
 		// @formatter: off
+		
 		list.add(Jeep.builder()
 				.modelId(JeepModel.WRANGLER)
 				.trimLevel("Sport")
