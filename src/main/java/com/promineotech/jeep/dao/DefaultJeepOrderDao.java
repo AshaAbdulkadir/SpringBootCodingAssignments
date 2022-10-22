@@ -28,12 +28,21 @@ import com.promineotech.jeep.entity.OptionType;
 import com.promineotech.jeep.entity.Order;
 import com.promineotech.jeep.entity.Tire;
 
+/**
+ * 
+ * @author Asha
+ *
+ */
 @Component
 public class DefaultJeepOrderDao implements JeepOrderDao {
+	
 
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
-
+	
+	/**
+	 * 
+	 */
 	@Override
 	public Order saveOrder(Customer customer, Jeep jeep, Color color, Engine engine, Tire tire, BigDecimal price,
 			List<Option> options) {
@@ -59,7 +68,11 @@ public class DefaultJeepOrderDao implements JeepOrderDao {
      //@formatter:on
 
 	}
-
+	/**
+	 * 
+	 * @param options
+	 * @param orderPK
+	 */
 	private void saveOptions(List<Option> options, Long orderPK) {
 		for (Option option : options) {
 			SqlParams params = generateInsertSql(option, orderPK);
@@ -172,7 +185,9 @@ public class DefaultJeepOrderDao implements JeepOrderDao {
 		});
 	}
 
-
+	/**
+	 * 
+	 */
 	@Override
 	public Optional<Customer> fetchCustomer(String customerId) {
 		// @formatter:off
@@ -188,7 +203,9 @@ public class DefaultJeepOrderDao implements JeepOrderDao {
 		return Optional.ofNullable(jdbcTemplate.query(sql, params, new CustomerResultSetExtractor()));
 	}
 
-
+	/**
+	 * 
+	 */
 	@Override
 	public Optional<Jeep> fetchModel(JeepModel model, String trim, int doors) {
 		// @formatter:off
@@ -208,7 +225,9 @@ public class DefaultJeepOrderDao implements JeepOrderDao {
 		return Optional.ofNullable(jdbcTemplate.query(sql, params, new ModelResultSetExtractor()));
 	}
 
-
+	/**
+	 * 
+	 */
 	@Override
 	public Optional<Color> fetchColor(String colorId) {
 		// @formatter:off
@@ -224,7 +243,9 @@ public class DefaultJeepOrderDao implements JeepOrderDao {
 		return Optional.ofNullable(jdbcTemplate.query(sql, params, new ColorResultSetExtractor()));
 	}
 
-
+	/**
+	 * 
+	 */
 	@Override
 	public Optional<Engine> fetchEngine(String engineId) {
 		// @formatter:off
@@ -240,7 +261,9 @@ public class DefaultJeepOrderDao implements JeepOrderDao {
 		return Optional.ofNullable(jdbcTemplate.query(sql, params, new EngineResultSetExtractor()));
 	}
 
-	
+	/**
+	 * 
+	 */
 	@Override
 	public Optional<Tire> fetchTire(String tireId) {
 		// @formatter:off
@@ -256,7 +279,11 @@ public class DefaultJeepOrderDao implements JeepOrderDao {
 		return Optional.ofNullable(jdbcTemplate.query(sql, params, new TireResultSetExtractor()));
 	}
 
-
+	/**
+	 * 
+	 * @author Asha
+	 *
+	 */
 	class TireResultSetExtractor implements ResultSetExtractor<Tire> {
 		@Override
 		public Tire extractData(ResultSet rs) throws SQLException {
@@ -275,7 +302,11 @@ public class DefaultJeepOrderDao implements JeepOrderDao {
 		}
 	}
 
-
+	/**
+	 * 
+	 * @author Asha
+	 *
+	 */
 	class EngineResultSetExtractor implements ResultSetExtractor<Engine> {
 		@Override
 		public Engine extractData(ResultSet rs) throws SQLException {
@@ -298,7 +329,11 @@ public class DefaultJeepOrderDao implements JeepOrderDao {
 		}
 	}
 
-
+	/**
+	 * 
+	 * @author Asha
+	 *
+	 */
 	class ColorResultSetExtractor implements ResultSetExtractor<Color> {
 		@Override
 		public Color extractData(ResultSet rs) throws SQLException {
@@ -315,7 +350,12 @@ public class DefaultJeepOrderDao implements JeepOrderDao {
 	      // @formatter:on
 		}
 	}
-
+	
+	/**
+	 * 
+	 * @author Asha
+	 *
+	 */
 	class ModelResultSetExtractor implements ResultSetExtractor<Jeep> {
 		@Override
 		public Jeep extractData(ResultSet rs) throws SQLException {
@@ -333,7 +373,12 @@ public class DefaultJeepOrderDao implements JeepOrderDao {
 	      // @formatter:on
 		}
 	}
-
+	
+	/**
+	 * 
+	 * @author Asha
+	 *
+	 */
 	class CustomerResultSetExtractor implements ResultSetExtractor<Customer> {
 		@Override
 		public Customer extractData(ResultSet rs) throws SQLException {
@@ -351,7 +396,12 @@ public class DefaultJeepOrderDao implements JeepOrderDao {
 
 		}
 	}
-
+	
+	/**
+	 * 
+	 * @author Asha
+	 *
+	 */
 	class SqlParams {
 		String sql;
 		MapSqlParameterSource source = new MapSqlParameterSource();
