@@ -10,6 +10,9 @@ import javax.validation.constraints.Positive;
 
 import org.hibernate.validator.constraints.Length;
 
+import lombok.Data;
+
+@Data
 public class OrderRequest {
 	@NotNull
 	@Length(max = 30)
@@ -44,8 +47,5 @@ public class OrderRequest {
 	@Pattern(regexp = "[\\w\\s]*")
 	private String tire;
 
-	private List<@NotNull @Length(max = 30) @Pattern(
-			regexp = "[A-Z0-9_]*") String> options;
-	
-
+	private List<@Length(max = 30) @Pattern(regexp = "[\\w\\s]*") String> options;
 }

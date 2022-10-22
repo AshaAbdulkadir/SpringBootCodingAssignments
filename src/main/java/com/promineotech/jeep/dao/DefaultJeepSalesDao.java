@@ -57,7 +57,7 @@ public class DefaultJeepSalesDao implements JeepSalesDao {
 								.modelPK(rs.getLong("model_pk"))
 								.numDoors(rs.getInt("num_doors"))
 								.trimLevel(rs.getString("trim_level"))
-								.wheelsize(rs.getInt("wheel_size"))
+								.wheelSize(rs.getInt("wheel_size"))
 								.build();
 						
 						// @formatter: on

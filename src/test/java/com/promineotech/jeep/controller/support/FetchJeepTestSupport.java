@@ -23,7 +23,7 @@ public class FetchJeepTestSupport extends BaseTest {
 				.modelId(JeepModel.WRANGLER)
 				.trimLevel("Sport")
 				.numDoors(4)
-				.wheelsize(17)
+				.wheelSize(17)
 				.basePrice(new BigDecimal("31975.00"))
 				.build());
 		
@@ -31,7 +31,7 @@ public class FetchJeepTestSupport extends BaseTest {
 				.modelId(JeepModel.WRANGLER)
 				.trimLevel("Sport")
 				.numDoors(2)
-				.wheelsize(17)
+				.wheelSize(17)
 				.basePrice(new BigDecimal("28475.00"))
 				.build());
 

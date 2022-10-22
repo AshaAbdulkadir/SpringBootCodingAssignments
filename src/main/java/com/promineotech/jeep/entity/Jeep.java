@@ -21,7 +21,7 @@ public class Jeep implements Comparable<Jeep> {
 	private JeepModel modelId;
 	private String trimLevel;
 	private int numDoors;
-	private int wheelsize;
+	private int wheelSize;
 	private BigDecimal basePrice;
 	
 	
