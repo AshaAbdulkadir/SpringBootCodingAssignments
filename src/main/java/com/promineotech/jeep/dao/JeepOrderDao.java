@@ -1,10 +1,9 @@
 package com.promineotech.jeep.dao;
 
-import com.promineotech.jeep.entity.Order;
-import com.promineotech.jeep.entity.OrderRequest;
+import com.promineotech.jeep.entity.Customer;
 
 public interface JeepOrderDao {
-
-	Order createOrder(OrderRequest orderRequest);
+	
+	Customer fetchCustomer(String customer);
 
 }
