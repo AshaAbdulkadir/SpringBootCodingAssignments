@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.promineotech.jeep.entity.Jeep;
 import com.promineotech.jeep.entity.JeepModel;
@@ -27,6 +28,14 @@ public class BasicJeepSalesController implements JeepSalesController {
 		log.info("model={}, trim={}", model, trim);
 		
 		return jeepSalesService.fetchJeeps(model, trim);
+	}
+	/**
+	 * 
+	 */
+	@Override
+	public String uploadImage(MultipartFile image, Long jeepPK) {
+		log.debug("image={}, jeepPK{}", image, jeepPK);
+		return "Success!";
 	}
 
 }
