@@ -3,6 +3,7 @@ package com.promineotech.jeep.service;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 import com.promineotech.jeep.dao.JeepSalesDao;
 import com.promineotech.jeep.entity.Jeep;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 /**
  * 
  * @author Asha
@@ -43,6 +45,16 @@ public class DefaultJeepSaleService implements JeepSalesService {
 		
 		Collections.sort(jeeps);
 		return jeeps; 
+	}
+
+	@Transactional
+	@Override
+	public String uploadImage(MultipartFile image, Long modelPK) {
+		String imageId = UUID.randomUUID().toString();
+		
+		log.debug("Uploading image with ID={}", imageId);
+
+		return null;
 	}
 
 }

@@ -45,7 +45,7 @@ class ImageUploadTest {
 					.multipart("/jeeps/1/image")
 					.file(file))
 					.andDo(print())
-					.andExpect(status().isOk())
+					.andExpect(status().is(201))
 					.andReturn();
 			// @formatter: on 
 			
