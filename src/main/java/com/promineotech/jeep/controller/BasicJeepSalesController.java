@@ -29,13 +29,18 @@ public class BasicJeepSalesController implements JeepSalesController {
 		
 		return jeepSalesService.fetchJeeps(model, trim);
 	}
+	
+	
 	/**
 	 * 
 	 */
 	@Override
 	public String uploadImage(MultipartFile image, Long jeepPK) {
 		log.debug("image={}, jeepPK{}", image, jeepPK);
-		return jeepSalesService.uploadImage(image, jeepPK);
+		String imageId = jeepSalesService.uploadImage(image, jeepPK);
+		String json = "{\"imageId\":\"" + imageId + "\"}";
+		
+		return json;
 	}
 
 }

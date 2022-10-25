@@ -14,7 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -24,12 +26,18 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 class ImageUploadTest {
 
 	private static final String JEEP_IMAGE = "Jeep.jpeg";
+	
 	@Autowired
 	private MockMvc mockMvc;
+	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 	
 	@Test
 	void testThatTheServerReceivesAnImageAndReturnsAnOkResponse() throws Exception {
 		Resource image = new ClassPathResource(JEEP_IMAGE);
+		
+		int numRows = JdbcTestUtils.countRowsInTable(jdbcTemplate, "images");
 		
 		if(!image.exists()) {
 			fail("Could not find %s", JEEP_IMAGE);
@@ -51,6 +59,9 @@ class ImageUploadTest {
 			
 			String content = result.getResponse().getContentAsString();
 			assertThat(content).isNotEmpty();
+			
+			assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "images"))
+			.isEqualTo(numRows +1);
 		}
 		}
 	}
