@@ -126,6 +126,12 @@ public class DefaultJeepSalesDao implements JeepSalesDao {
 			
 			}});
 	     
+	     /*
+	      * No image data in the DBeaver
+	      * Download Postman(REST client - API tool) used to upload images to a database- 
+	      * by connecting to the real life database - with a running application 
+	      */
+	     
 		}
 
 }
