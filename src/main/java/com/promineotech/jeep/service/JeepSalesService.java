@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.promineotech.jeep.entity.Image;
 import com.promineotech.jeep.entity.Jeep;
 import com.promineotech.jeep.entity.JeepModel;
 
@@ -24,5 +25,13 @@ public interface JeepSalesService {
 	 * @return
 	 */
 	String uploadImage(MultipartFile image, Long jeepPK);
+	
+	
+	/**
+	 * 
+	 * @param imageId
+	 * @return
+	 */
+	Image retrieveImage(String imageId);
 
 }

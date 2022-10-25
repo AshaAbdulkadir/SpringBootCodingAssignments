@@ -103,5 +103,14 @@ public class DefaultJeepSaleService implements JeepSalesService {
 		}
 
 	}
+	
+	@Transactional(readOnly = true)
+	@Override
+	public Image retrieveImage(String imageId) {
+		
+		return jeepSalesDao.retrieveImage(imageId)
+				.orElseThrow(() -> new NoSuchElementException(
+						"Could not find image with ID = " + imageId));
+	}
 
 }
